@@ -2,13 +2,36 @@ from flask import Flask, render_template, send_from_directory
 from flask_socketio import SocketIO, emit
 import os
 import socket
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'interactive-button-secret'
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# Current button state - stored on server
-button_state = {"count": 0}
+# File to store button clicks
+CLICK_DATA_FILE = "button_clicks.json"
+
+# Function to load click count from file
+def load_click_count():
+    try:
+        if os.path.exists(CLICK_DATA_FILE):
+            with open(CLICK_DATA_FILE, 'r') as f:
+                data = json.load(f)
+                return data.get("count", 0)
+    except Exception as e:
+        print(f"Error loading click data: {e}")
+    return 0
+
+# Function to save click count to file
+def save_click_count(count):
+    try:
+        with open(CLICK_DATA_FILE, 'w') as f:
+            json.dump({"count": count}, f)
+    except Exception as e:
+        print(f"Error saving click data: {e}")
+
+# Current button state - loaded from file or default to 0
+button_state = {"count": load_click_count()}
 
 # Serve the index.html file at the root URL
 @app.route('/')
@@ -32,9 +55,11 @@ def handle_connect():
 def handle_button_click():
     # Update the count
     button_state['count'] += 1
+    # Save to file for persistence
+    save_click_count(button_state['count'])
     # Broadcast the new state to all connected clients
     emit('update_state', button_state, broadcast=True)
-    print(f"Button clicked. New count: {button_state['count']}")
+    print(f"Button clicked. New count: {button_state['count']} (saved to file)")
 
 # Get the local IP address
 def get_local_ip():

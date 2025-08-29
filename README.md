@@ -1,6 +1,6 @@
 # Epic Button Speedrun Challenge
 
-This is an interactive multi-user button clicking game built with Flask and Socket.IO where users can compete to click a button as fast as possible. All clicks are synchronized in real-time across all connected users!
+This is an interactive multi-user button clicking game built with Flask and Socket.IO where users can compete to click a button as fast as possible. All clicks are synchronized in real-time across all connected users and persist even when the server restarts!
 
 ## Setup and Running
 
@@ -9,6 +9,10 @@ This is an interactive multi-user button clicking game built with Flask and Sock
 3. Run the application: `python app.py`
 4. Open your browser and go to: `http://localhost:5000`
 5. Share with friends using your local network IP (displayed when starting the app)
+
+## Persistence
+
+The button click count is now saved to a file (`button_clicks.json`) so it persists between server restarts. Your progress is never lost!
 
 ## Network Access
 
@@ -21,7 +25,8 @@ To allow others on your network to access the application:
 
 - The Flask app with Socket.IO serves the interactive button webpage
 - Button clicks are synchronized in real-time across all connected users
-- The server maintains the global counter state
+- The server maintains the global counter state and saves it to a file
+- Click count persists between server restarts
 - Fun animations and confetti effects trigger when clicking the button
 - Special milestone effects happen every 10 clicks
 
@@ -31,3 +36,4 @@ To allow others on your network to access the application:
 - `app.py`: The Flask and Socket.IO server that manages real-time communication
 - `requirements.txt`: List of Python packages needed for the application
 - `open_firewall.bat`: Script to open the required firewall port on Windows
+- `button_clicks.json`: Automatically created file that stores the persistent click count
