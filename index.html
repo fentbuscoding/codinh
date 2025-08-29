@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Interactive Real-Time Button</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --success-color: #4CAF50;
+            --text-color: #333;
+            --light-text: #7b7b7b;
+            --background-color: #f0f2f5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: var(--background-color);
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+        }
+
+        .container {
+            text-align: center;
+            padding: 2.5rem;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            max-width: 550px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 2.2rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        .button {
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            z-index: 1;
+        }
+
+        .button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .button:hover:before {
+            left: 0;
+        }
+
+        .button:active, .button.clicked {
+            transform: translateY(2px);
+            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .status {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            min-height: 1.6rem;
+            transition: all 0.3s;
+        }
+
+        .counter {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            background-color: rgba(67, 97, 238, 0.05);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+        }
+
+        #connection-status {
+            margin-top: 1.8rem;
+            font-size: 0.9rem;
+            color: var(--light-text);
+            background-color: rgba(0, 0, 0, 0.03);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(67, 97, 238, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(67, 97, 238, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(67, 97, 238, 0.5); }
+        }
+
+        .button.clicked {
+            animation: pulse 0.3s ease-in-out;
+        }
+
+        .counter {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .container {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Glowing effect for the button on hover */
+        .button:hover {
+            animation: glow 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Button</h1>
+        <p>Click the button and see real-time updates across all devices!</p>
+        <button id="liveButton" class="button">Click Me!</button>
+        <div class="status" id="status">Everyone sees your clicks in real-time</div>
+        <div class="counter" id="counter">Button has been clicked 0 times</div>
+        <div id="connection-status">Connecting to real-time service...</div>
+    </div>
+
+    <!-- Socket.IO Client Library -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    
+    <script>        // Wait for page to fully load
+        window.addEventListener('load', function() {
+            document.getElementById('connection-status').textContent = 'Connecting...';
+            initApp();
+        });
+
+        function initApp() {
+            // Get elements
+            const button = document.getElementById('liveButton');
+            const statusText = document.getElementById('status');
+            const counterText = document.getElementById('counter');
+            const connectionStatus = document.getElementById('connection-status');
+            
+            // Button state
+            let buttonState = {
+                count: 0
+            };
+
+            // Connect to Socket.IO server
+            let socket;
+            try {
+                // Auto-connect to the server hosting this page
+                socket = io();
+                
+                // Handle connection events
+                socket.on('connect', function() {
+                    connectionStatus.textContent = '✓ Connected! You can see everyone\'s clicks';
+                    connectionStatus.style.backgroundColor = 'rgba(76, 175, 80, 0.1)';
+                    connectionStatus.style.color = 'var(--success-color)';
+                    console.log('Connected to server');
+                });
+                
+                socket.on('disconnect', function() {
+                    connectionStatus.textContent = '⟲ Disconnected. Reconnecting...';
+                    connectionStatus.style.backgroundColor = 'rgba(255, 152, 0, 0.1)';
+                    connectionStatus.style.color = '#ff9800';
+                    console.log('Disconnected from server');
+                });
+                
+                // Listen for state updates from the server
+                socket.on('update_state', function(newState) {
+                    console.log('Received state update:', newState);
+                    buttonState = newState;
+                    updateButtonUI(false); // Don't animate on remote updates
+                });
+                
+                // Show connection error if we can't connect
+                socket.on('connect_error', function(error) {
+                    connectionStatus.textContent = '✗ Connection error! Using local mode only';
+                    connectionStatus.style.backgroundColor = 'rgba(244, 67, 54, 0.1)';
+                    connectionStatus.style.color = '#f44336';
+                    console.error('Connection error:', error);
+                });
+            } catch (e) {
+                connectionStatus.textContent = 'Error connecting to server. Using local mode only.';
+                console.error('Socket.IO initialization error:', e);
+            }
+
+            // Update UI based on state
+            function updateButtonUI(animate = true) {
+                // Visual feedback for button click (only if local click)
+                if (animate) {
+                    button.classList.add('clicked');
+                    setTimeout(() => {
+                        button.classList.remove('clicked');
+                    }, 200);
+                }
+                
+                // Update counter text with animation
+                counterText.textContent = `Button has been clicked ${buttonState.count} times`;
+                
+                // Add highlight animation to counter
+                counterText.style.animation = 'none'; // Reset animation
+                setTimeout(() => {
+                    counterText.style.animation = 'pulse 0.5s ease-in-out';
+                }, 10);
+            }
+                
+            // Initialize the display
+            updateButtonUI(false);
+            
+            // Handle button click
+            button.addEventListener('click', () => {
+                // Send the click to the server
+                try {
+                    socket.emit('button_click');
+                    
+                    // Show status message for local user feedback with animation
+                    statusText.textContent = `You clicked the button!`;
+                    statusText.style.transform = 'scale(1.05)';
+                    statusText.style.color = 'var(--success-color)';
+                    
+                    // Add animation for immediate feedback
+                    button.classList.add('clicked');
+                    setTimeout(() => {
+                        button.classList.remove('clicked');
+                    }, 300);
+                    
+                    // Reset status message after delay with smooth transition
+                    setTimeout(() => {
+                        statusText.style.transform = 'scale(1)';
+                        statusText.style.color = 'var(--primary-color)';
+                        statusText.textContent = 'Everyone connected can see the clicks!'; 
+                    }, 2000);
+                } catch (e) {
+                    // Fallback to local mode if socket fails
+                    console.error('Error sending click:', e);
+                    buttonState.count++;
+                    updateButtonUI();
+                    statusText.textContent = 'Using local mode (server connection failed)';
+                }
+            });
+            
+            // Initial status message
+            statusText.textContent = 'Click the button so everyone can see!';
+        }
+    </script>
+</body>
+</html>
