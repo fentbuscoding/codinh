@@ -6,17 +6,17 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Interactive Real-Time Button</title>
+    <title>EPIC BUTTON SPEEDRUN CHALLENGE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
         :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3f37c9;
-            --accent-color: #4cc9f0;
-            --success-color: #4CAF50;
+            --primary-color: #ff6b6b;
+            --secondary-color: #ff9e40;
+            --accent-color: #4effa1;
+            --success-color: #00ff9d;
             --text-color: #333;
             --light-text: #7b7b7b;
             --background-color: #f0f2f5;
@@ -29,27 +29,36 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: var(--background-color);
-            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-color: #ffde59;
+            background-image: linear-gradient(45deg, #ffde59 25%, #ffcc00 25%, #ffcc00 50%, #ffde59 50%, #ffde59 75%, #ffcc00 75%, #ffcc00 100%);
+            background-size: 40px 40px;
             color: var(--text-color);
+            overflow: hidden;
         }
 
         .container {
             text-align: center;
             padding: 2.5rem;
             background-color: white;
+            border: 4px dashed #ff00ff;
             border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 25px rgba(255, 0, 255, 0.3);
             max-width: 550px;
             width: 90%;
             position: relative;
             overflow: hidden;
+            animation: rotate 4s infinite alternate;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(-0.5deg); }
+            100% { transform: rotate(0.5deg); }
         }
         
         .container:before {
@@ -58,39 +67,52 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            height: 15px;
+            background: repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 20px, #ffde59 20px, #ffde59 40px);
         }
 
         h1 {
             margin-bottom: 1rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 2.2rem;
+            color: #ff00aa;
+            font-weight: 800;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00;
+            transform: rotate(-2deg);
+            letter-spacing: -1px;
+            animation: blink 1.5s infinite alternate;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00; }
+            100% { opacity: 0.8; text-shadow: 4px 4px 0 #ffff00, -4px -4px 0 #00ffff; }
         }
 
         p {
             margin-bottom: 1.5rem;
-            color: var(--light-text);
-            font-size: 1.1rem;
+            color: #ff5722;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transform: rotate(1deg);
         }
 
         .button {
-            padding: 1rem 2.5rem;
-            font-size: 1.2rem;
-            font-weight: 500;
+            padding: 1.2rem 3rem;
+            font-size: 1.5rem;
+            font-weight: 800;
             cursor: pointer;
-            border: none;
-            border-radius: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: 3px solid #00ff00;
+            border-radius: 20px;
+            background: repeating-radial-gradient(circle, #ff9e40, #ff6b6b 30px, #ff00ff 30px, #ff00ff 60px);
             color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+            transition: all 0.1s ease;
+            box-shadow: 0 8px 0 #00aa00;
             position: relative;
             overflow: hidden;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 0.5px;
+            font-family: 'Comic Sans MS', cursive;
+            letter-spacing: 1px;
             z-index: 1;
+            text-shadow: 2px 2px 0 #000;
+            transform: rotate(-3deg);
         }
 
         .button:before {
@@ -106,37 +128,44 @@
         }
 
         .button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.4);
+            transform: translateY(-3px) rotate(3deg) scale(1.1);
+            box-shadow: 0 12px 0 #00aa00;
+            animation: shake 0.5s infinite;
         }
 
-        .button:hover:before {
-            left: 0;
+        @keyframes shake {
+            0% { transform: translateY(-3px) rotate(-5deg); }
+            50% { transform: translateY(-3px) rotate(5deg); }
+            100% { transform: translateY(-3px) rotate(-5deg); }
         }
 
         .button:active, .button.clicked {
-            transform: translateY(2px);
-            box-shadow: 0 3px 10px rgba(67, 97, 238, 0.3);
+            transform: translateY(5px) rotate(0deg);
+            box-shadow: 0 3px 0 #00aa00;
         }
 
         .status {
             margin-top: 1.5rem;
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            font-weight: 500;
+            font-size: 1.3rem;
+            color: #ff00aa;
+            font-weight: 700;
             min-height: 1.6rem;
             transition: all 0.3s;
+            transform: rotate(-1deg);
         }
 
         .counter {
             margin-top: 1.2rem;
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            font-weight: 600;
-            background-color: rgba(67, 97, 238, 0.05);
-            border-radius: 8px;
+            font-size: 1.8rem;
+            color: #ff5722;
+            font-weight: 800;
+            background-color: #ffff00;
+            border: 3px dashed #00ffff;
+            border-radius: 10px;
             padding: 0.5rem 1rem;
             display: inline-block;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+            transform: rotate(2deg);
         }
 
         #connection-status {
@@ -167,6 +196,8 @@
             50% { box-shadow: 0 0 20px rgba(67, 97, 238, 0.8); }
             100% { box-shadow: 0 0 5px rgba(67, 97, 238, 0.5); }
         }
+        
+        /* Speedlines removed to fix lag */
 
         .button.clicked {
             animation: pulse 0.3s ease-in-out;
@@ -188,21 +219,24 @@
 </head>
 <body>
     <div class="container">
-        <h1>Interactive Button</h1>
-        <p>Click the button and see real-time updates across all devices!</p>
-        <button id="liveButton" class="button">Click Me!</button>
-        <div class="status" id="status">Everyone sees your clicks in real-time</div>
-        <div class="counter" id="counter">Button has been clicked 0 times</div>
-        <div id="connection-status">Connecting to real-time service...</div>
+        <h1>EPIC BUTTON SPEEDRUN!!1!</h1>
+        <p>⚡️ CLICK AS FAST AS YOU CAN!! EVERYONE SEES YOUR CLICKS!! ⚡️</p>
+        <button id="liveButton" class="button">SMASH ME!!!</button>
+        <div class="status" id="status">LET'S GOOOOOO!!!</div>
+        <div class="counter" id="counter">Button has been SMASHED 0 times</div>
+        <div id="connection-status">Loading crazy button powers...</div>
     </div>
 
     <!-- Socket.IO Client Library -->
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <!-- Confetti JS for extra fun -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     
     <script>        // Wait for page to fully load
         window.addEventListener('load', function() {
             document.getElementById('connection-status').textContent = 'Connecting...';
             initApp();
+            // Speedlines removed to fix performance issues
         });
 
         function initApp() {
@@ -225,16 +259,18 @@
                 
                 // Handle connection events
                 socket.on('connect', function() {
-                    connectionStatus.textContent = '✓ Connected! You can see everyone\'s clicks';
-                    connectionStatus.style.backgroundColor = 'rgba(76, 175, 80, 0.1)';
-                    connectionStatus.style.color = 'var(--success-color)';
+                    connectionStatus.textContent = '🚀 WOOHOO! EVERYONE CAN SEE YOUR EPIC CLICKS NOW!!';
+                    connectionStatus.style.backgroundColor = '#00ff00';
+                    connectionStatus.style.color = '#000000';
+                    connectionStatus.style.fontWeight = 'bold';
                     console.log('Connected to server');
                 });
                 
                 socket.on('disconnect', function() {
-                    connectionStatus.textContent = '⟲ Disconnected. Reconnecting...';
-                    connectionStatus.style.backgroundColor = 'rgba(255, 152, 0, 0.1)';
-                    connectionStatus.style.color = '#ff9800';
+                    connectionStatus.textContent = '😱 OH NO! DISCONNECTED! TRYING TO RECONNECT...';
+                    connectionStatus.style.backgroundColor = '#ffff00';
+                    connectionStatus.style.color = '#ff0000';
+                    connectionStatus.style.fontWeight = 'bold';
                     console.log('Disconnected from server');
                 });
                 
@@ -268,12 +304,25 @@
                 }
                 
                 // Update counter text with animation
-                counterText.textContent = `Button has been clicked ${buttonState.count} times`;
+                counterText.textContent = `Button has been SMASHED ${buttonState.count} times!!!!`;
                 
-                // Add highlight animation to counter
+                // Add SUPER EXTREME highlight animation to counter
                 counterText.style.animation = 'none'; // Reset animation
+                // Random colors for maximum excitement!!!
+                const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+                counterText.style.color = randomColor;
+                counterText.style.transform = 'scale(1.2) rotate(' + (Math.random() * 6 - 3) + 'deg)';
+                
                 setTimeout(() => {
                     counterText.style.animation = 'pulse 0.5s ease-in-out';
+                    // Add special milestone messages
+                    if (buttonState.count % 10 === 0 && buttonState.count > 0) {
+                        confetti({
+                            particleCount: 200,
+                            spread: 180,
+                            origin: { y: 0.5, x: 0.5 }
+                        });
+                    }
                 }, 10);
             }
                 
@@ -286,22 +335,62 @@
                 try {
                     socket.emit('button_click');
                     
-                    // Show status message for local user feedback with animation
-                    statusText.textContent = `You clicked the button!`;
-                    statusText.style.transform = 'scale(1.05)';
-                    statusText.style.color = 'var(--success-color)';
+                    // Show status message for local user feedback with EXTREME animation
+                    statusText.textContent = `BOOM! EPIC CLICK!!`;
+                    statusText.style.transform = 'scale(1.2) rotate(5deg)';
+                    statusText.style.color = '#00ff00';
                     
                     // Add animation for immediate feedback
                     button.classList.add('clicked');
+                    button.textContent = 'YESSS!!';
                     setTimeout(() => {
                         button.classList.remove('clicked');
+                        button.textContent = 'SMASH ME!!!';
+                    
+                    // EPIC CONFETTI EXPLOSION!!!
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 },
+                        colors: ['#ff00ff', '#00ff00', '#ffff00', '#00ffff']
+                    });
+                    
+                    // Add COMIC STYLE POW EFFECT!!
+                    const soundEffect = document.createElement('div');
+                    const sounds = ['POW!', 'BOOM!', 'WHAM!', 'BAM!', 'KAPOW!', 'ZAP!'];
+                    soundEffect.innerText = sounds[Math.floor(Math.random() * sounds.length)];
+                    soundEffect.style.position = 'absolute';
+                    soundEffect.style.left = Math.random() * 60 + 20 + '%';
+                    soundEffect.style.top = Math.random() * 60 + 20 + '%';
+                    soundEffect.style.fontSize = '3rem';
+                    soundEffect.style.fontWeight = 'bold';
+                    soundEffect.style.color = '#' + Math.floor(Math.random()*16777215).toString(16);
+                    soundEffect.style.textShadow = '2px 2px 0 #000';
+                    soundEffect.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg) scale(0)';
+                    soundEffect.style.opacity = '0';
+                    soundEffect.style.transition = 'all 0.2s ease-in-out';
+                    soundEffect.style.zIndex = '1000';
+                    document.body.appendChild(soundEffect);
+                    
+                    // Animate it
+                    setTimeout(() => {
+                        soundEffect.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg) scale(1.5)';
+                        soundEffect.style.opacity = '1';
+                    }, 10);
+                    
+                    // Remove it
+                    setTimeout(() => {
+                        soundEffect.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg) scale(0)';
+                        soundEffect.style.opacity = '0';
+                        setTimeout(() => soundEffect.remove(), 300);
+                    }, 1000);
                     }, 300);
                     
                     // Reset status message after delay with smooth transition
                     setTimeout(() => {
-                        statusText.style.transform = 'scale(1)';
-                        statusText.style.color = 'var(--primary-color)';
-                        statusText.textContent = 'Everyone connected can see the clicks!'; 
+                        statusText.style.transform = 'scale(1) rotate(-1deg)';
+                        statusText.style.color = '#ff00aa';
+                        statusText.textContent = 'KEEP GOING!! EVERYONE CAN SEE IT!!'; 
                     }, 2000);
                 } catch (e) {
                     // Fallback to local mode if socket fails
