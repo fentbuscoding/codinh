@@ -100,17 +100,33 @@
             font-size: 1.5rem;
             font-weight: 800;
             cursor: pointer;
-            border: 3px solid #00ff00;
             border-radius: 20px;
-            background: repeating-radial-gradient(circle, #ff9e40, #ff6b6b 30px, #ff00ff 30px, #ff00ff 60px);
-            color: white;
-            transition: all 0.1s ease;
-            box-shadow: 0 8px 0 #00aa00;
             position: relative;
             overflow: hidden;
-            font-family: 'Comic Sans MS', cursive;
             letter-spacing: 1px;
             z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        /* Simple button style for 0-500 clicks */
+        .button.simple {
+            border: 2px solid #4a90e2;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+            transform: none;
+            text-shadow: none;
+        }
+
+        /* Elaborate button style for 500+ clicks */
+        .button.elaborate {
+            border: 3px solid #00ff00;
+            background: repeating-radial-gradient(circle, #ff9e40, #ff6b6b 30px, #ff00ff 30px, #ff00ff 60px);
+            color: white;
+            box-shadow: 0 8px 0 #00aa00;
+            font-family: 'Comic Sans MS', cursive;
             text-shadow: 2px 2px 0 #000;
             transform: rotate(-3deg);
         }
@@ -127,19 +143,32 @@
             z-index: -1;
         }
 
-        .button:hover {
-            transform: translateY(-3px) rotate(3deg) scale(1.1);
-            box-shadow: 0 12px 0 #00aa00;
-            animation: shake 0.5s infinite;
-        }
-
         @keyframes shake {
             0% { transform: translateY(-3px) rotate(-5deg); }
             50% { transform: translateY(-3px) rotate(5deg); }
             100% { transform: translateY(-3px) rotate(-5deg); }
         }
 
-        .button:active, .button.clicked {
+        /* Simple button hover effects */
+        .button.simple:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(74, 144, 226, 0.4);
+            background: linear-gradient(135deg, #357abd, #2e6da4);
+        }
+
+        .button.simple:active, .button.simple.clicked {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
+        }
+
+        /* Elaborate button hover effects */
+        .button.elaborate:hover {
+            transform: translateY(-3px) rotate(3deg) scale(1.1);
+            box-shadow: 0 12px 0 #00aa00;
+            animation: glow 1.5s infinite, shake 0.5s infinite;
+        }
+
+        .button.elaborate:active, .button.elaborate.clicked {
             transform: translateY(5px) rotate(0deg);
             box-shadow: 0 3px 0 #00aa00;
         }
@@ -209,11 +238,6 @@
 
         .container {
             animation: fadeIn 0.8s ease-out;
-        }
-
-        /* Glowing effect for the button on hover */
-        .button:hover {
-            animation: glow 1.5s infinite;
         }
     </style>
 </head>
@@ -295,6 +319,16 @@
 
             // Update UI based on state
             function updateButtonUI(animate = true) {
+                // Apply appropriate button style based on click count
+                const button = document.getElementById('liveButton');
+                button.classList.remove('simple', 'elaborate');
+                
+                if (buttonState.count < 500) {
+                    button.classList.add('simple');
+                } else {
+                    button.classList.add('elaborate');
+                }
+                
                 // Visual feedback for button click (only if local click)
                 if (animate) {
                     button.classList.add('clicked');
