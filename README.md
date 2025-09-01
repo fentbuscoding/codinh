@@ -10,9 +10,40 @@ This is an interactive multi-user button clicking game built with Flask and Sock
 4. Open your browser and go to: `http://localhost:5000`
 5. Share with friends using your local network IP (displayed when starting the app)
 
+## Features
+
+### Progressive Button Experience
+The button evolves as you click it, going through 5 distinct levels:
+- **Level 1 (0-500 clicks)**: Simple button with minimal styling
+- **Level 2 (500-1000 clicks)**: Enhanced button with better appearance
+- **Level 3 (1000-1500 clicks)**: Exciting button with animations
+- **Level 4 (1500-2000 clicks)**: Advanced button with special effects
+- **Level 5 (2000+ clicks)**: Epic button with maximum visual effects
+
+### Sound Effects System
+- Different sounds for each button level
+- Special milestone sounds when reaching click milestones
+- Sound toggle button to mute/unmute all audio
+- Background music at higher levels
+
+### Achievements System
+- Unlock achievements as you click and reach milestones
+- Achievement notifications when you earn a new achievement
+- View all available and locked achievements in the achievements panel
+- Special secret achievement to discover
+
+### Mobile Optimization
+- Responsive design that works on all device sizes
+- Touch-friendly buttons and controls
+- Haptic feedback on mobile devices (vibration)
+- Landscape and portrait orientation support
+
 ## Persistence
 
-The button click count is now saved to a file (`button_clicks.json`) so it persists between server restarts. Your progress is never lost!
+All data persists between server restarts:
+- Button click count is saved to a file (`button_clicks.json`)
+- Achievements are saved locally and on the server
+- User statistics are tracked across sessions
 
 ## Network Access
 
@@ -29,6 +60,9 @@ To allow others on your network to access the application:
 - Click count persists between server restarts
 - Fun animations and confetti effects trigger when clicking the button
 - Special milestone effects happen every 10 clicks
+- Sound effects and music enhance the experience
+- Achievements system rewards continued engagement
+- Mobile-friendly design ensures it works on all devices
 
 ## Files
 
@@ -37,3 +71,19 @@ To allow others on your network to access the application:
 - `requirements.txt`: List of Python packages needed for the application
 - `open_firewall.bat`: Script to open the required firewall port on Windows
 - `button_clicks.json`: Automatically created file that stores the persistent click count
+- `achievements.json`: Stores global achievement data
+- `stats.json`: Stores user statistics and session data
+- `test_features.py`: Test script to verify functionality
+
+## Testing
+
+Run the test script to verify all features are working correctly:
+```
+python test_features.py --all
+```
+
+Or test specific features:
+```
+python test_features.py --socket --api
+python test_features.py --clicks 50
+```
