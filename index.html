@@ -46,22 +46,88 @@
             text-align: center;
             padding: 2.5rem;
             background-color: white;
-            border: 4px dashed #ff00ff;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(255, 0, 255, 0.3);
             max-width: 550px;
             width: 90%;
             position: relative;
             overflow: hidden;
+        }
+
+        /* Different container styles based on level */
+        .level-1 ~ .status,
+        .level-1 ~ .counter,
+        .level-1 ~ #connection-status {
+            transform: none !important;
+            animation: none !important;
+            font-family: Arial, sans-serif;
+        }
+
+        body:has(.level-1) {
+            background-color: #f8f8f8;
+            background-image: none;
+            font-family: Arial, sans-serif;
+        }
+
+        body:has(.level-2) {
+            background-color: #f0f2f5;
+            background-image: linear-gradient(135deg, #f0f2f5 0%, #dfe6e9 100%);
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body:has(.level-3) {
+            background-color: #ffde59;
+            background-image: linear-gradient(45deg, #ffde59 0%, #ffcc00 100%);
+        }
+
+        body:has(.level-4) {
+            background-color: #673ab7;
+            background-image: linear-gradient(135deg, #673ab7 0%, #9c27b0 100%);
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+        }
+
+        body:has(.level-5) {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            background-color: #ffde59;
+            background-image: linear-gradient(45deg, #ffde59 25%, #ffcc00 25%, #ffcc00 50%, #ffde59 50%, #ffde59 75%, #ffcc00 75%, #ffcc00 100%);
+            background-size: 40px 40px;
+        }
+
+        /* Container styling based on level */
+        body:has(.level-1) .container {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        body:has(.level-2) .container {
+            border: 2px solid #4a90e2;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        body:has(.level-3) .container {
+            border: 3px solid #ff9e40;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        body:has(.level-4) .container {
+            border: 3px solid #9c27b0;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            animation: fadeIn 0.7s ease-out;
+        }
+
+        body:has(.level-5) .container {
+            border: 4px dashed #ff00ff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(255, 0, 255, 0.3);
             animation: rotate 4s infinite alternate;
         }
-        
-        @keyframes rotate {
-            0% { transform: rotate(-0.5deg); }
-            100% { transform: rotate(0.5deg); }
-        }
-        
-        .container:before {
+
+        body:has(.level-5) .container:before {
             content: '';
             position: absolute;
             top: 0;
@@ -70,9 +136,96 @@
             height: 15px;
             background: repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 20px, #ffde59 20px, #ffde59 40px);
         }
+        
+        @keyframes rotate {
+            0% { transform: rotate(-0.5deg); }
+            100% { transform: rotate(0.5deg); }
+        }
 
         h1 {
             margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* Level-based heading styles */
+        body:has(.level-1) h1 {
+            color: #333;
+            font-weight: 600;
+            font-family: Arial, sans-serif;
+            transform: none;
+            letter-spacing: normal;
+            text-shadow: none;
+            animation: none;
+            font-size: 1.8rem;
+        }
+        
+        body:has(.level-1) p {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: normal;
+            transform: none;
+            font-family: Arial, sans-serif;
+        }
+
+        body:has(.level-2) h1 {
+            color: #4a90e2;
+            font-weight: 700;
+            font-size: 2rem;
+            font-family: 'Poppins', sans-serif;
+            transform: none;
+            letter-spacing: normal;
+            text-shadow: none;
+            animation: none;
+        }
+        
+        body:has(.level-2) p {
+            color: #357abd;
+            font-size: 1rem;
+            font-weight: 500;
+            transform: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body:has(.level-3) h1 {
+            color: #ff6b6b;
+            font-weight: 700;
+            font-size: 2.2rem;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+            transform: rotate(-1deg);
+            letter-spacing: -0.5px;
+            animation: none;
+        }
+        
+        body:has(.level-3) p {
+            color: #ff9e40;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transform: rotate(0.5deg);
+        }
+
+        body:has(.level-4) h1 {
+            color: #9c27b0;
+            font-weight: 800;
+            font-size: 2.3rem;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+            transform: rotate(-1.5deg);
+            letter-spacing: -0.5px;
+            animation: pulse 2s infinite alternate;
+        }
+        
+        body:has(.level-4) p {
+            color: #673ab7;
+            font-size: 1.15rem;
+            font-weight: bold;
+            transform: rotate(0.8deg);
+        }
+
+        body:has(.level-5) h1 {
             color: #ff00aa;
             font-weight: 800;
             font-size: 2.5rem;
@@ -82,65 +235,96 @@
             animation: blink 1.5s infinite alternate;
         }
         
-        @keyframes blink {
-            0% { opacity: 1; text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00; }
-            100% { opacity: 0.8; text-shadow: 4px 4px 0 #ffff00, -4px -4px 0 #00ffff; }
-        }
-
-        p {
-            margin-bottom: 1.5rem;
+        body:has(.level-5) p {
             color: #ff5722;
             font-size: 1.2rem;
             font-weight: bold;
             transform: rotate(1deg);
         }
+        
+        @keyframes blink {
+            0% { opacity: 1; text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00; }
+            100% { opacity: 0.8; text-shadow: 4px 4px 0 #ffff00, -4px -4px 0 #00ffff; }
+        }
 
         .button {
             padding: 1.2rem 3rem;
             font-size: 1.5rem;
-            font-weight: 800;
             cursor: pointer;
-            border-radius: 20px;
             position: relative;
-            overflow: hidden;
-            letter-spacing: 1px;
-            z-index: 1;
             transition: all 0.3s ease;
         }
 
-        /* Simple button style for 0-500 clicks */
-        .button.simple {
+        /* Level 1 (0-500 clicks): Default browser button */
+        .button.level-1 {
+            background-color: #f0f0f0;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            box-shadow: none;
+            transform: none;
+            text-shadow: none;
+        }
+
+        /* Level 2 (500-1000 clicks): Better looking button */
+        .button.level-2 {
             border: 2px solid #4a90e2;
             background: linear-gradient(135deg, #4a90e2, #357abd);
             color: white;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.2rem;
             box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
-            transform: none;
-            text-shadow: none;
         }
 
-        /* Elaborate button style for 500+ clicks */
-        .button.elaborate {
+        /* Level 3 (1000-1500 clicks): Even better */
+        .button.level-3 {
+            border: 2px solid #ff9e40;
+            background: linear-gradient(135deg, #ff9e40, #ff6b6b);
+            color: white;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            box-shadow: 0 6px 0 #e5614d;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+        }
+
+        /* Level 4 (1500-2000 clicks): Getting fancy */
+        .button.level-4 {
+            border: 3px solid #9c27b0;
+            background: linear-gradient(135deg, #9c27b0, #673ab7);
+            color: white;
+            border-radius: 15px;
+            padding: 1rem 2.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            box-shadow: 0 6px 0 #6a1b9a;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        /* Level 5 (2000+ clicks): Crazy button */
+        .button.level-5 {
             border: 3px solid #00ff00;
             background: repeating-radial-gradient(circle, #ff9e40, #ff6b6b 30px, #ff00ff 30px, #ff00ff 60px);
             color: white;
             box-shadow: 0 8px 0 #00aa00;
+            border-radius: 20px;
+            padding: 1.2rem 3rem;
+            font-size: 1.5rem;
+            font-weight: 800;
             font-family: 'Comic Sans MS', cursive;
             text-shadow: 2px 2px 0 #000;
             transform: rotate(-3deg);
-        }
-
-        .button:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.4s ease;
-            z-index: -1;
+            letter-spacing: 1px;
+            overflow: hidden;
         }
 
         @keyframes shake {
@@ -149,26 +333,78 @@
             100% { transform: translateY(-3px) rotate(-5deg); }
         }
 
-        /* Simple button hover effects */
-        .button.simple:hover {
-            transform: translateY(-2px) scale(1.05);
+        /* Level 1 button effects */
+        .button.level-1:hover {
+            background-color: #e8e8e8;
+            border-color: #b8b8b8;
+        }
+
+        .button.level-1:active, .button.level-1.clicked {
+            background-color: #d0d0d0;
+            border-color: #a0a0a0;
+        }
+
+        /* Level 2 button effects */
+        .button.level-2:hover {
+            transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(74, 144, 226, 0.4);
             background: linear-gradient(135deg, #357abd, #2e6da4);
         }
 
-        .button.simple:active, .button.simple.clicked {
-            transform: translateY(1px) scale(0.98);
+        .button.level-2:active, .button.level-2.clicked {
+            transform: translateY(1px);
             box-shadow: 0 2px 4px rgba(74, 144, 226, 0.3);
         }
 
-        /* Elaborate button hover effects */
-        .button.elaborate:hover {
+        /* Level 3 button effects */
+        .button.level-3:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #e5614d;
+            background: linear-gradient(135deg, #ff8c30, #ff5b5b);
+        }
+
+        .button.level-3:active, .button.level-3.clicked {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #e5614d;
+        }
+
+        /* Level 4 button effects */
+        .button.level-4:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 0 #6a1b9a;
+            filter: brightness(1.1);
+        }
+
+        .button.level-4:active, .button.level-4.clicked {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #6a1b9a;
+            filter: brightness(0.95);
+        }
+
+        /* Level 5 button hover effects */
+        .button.level-5:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        .button.level-5:hover {
             transform: translateY(-3px) rotate(3deg) scale(1.1);
             box-shadow: 0 12px 0 #00aa00;
             animation: glow 1.5s infinite, shake 0.5s infinite;
         }
 
-        .button.elaborate:active, .button.elaborate.clicked {
+        .button.level-5:hover:before {
+            left: 100%;
+        }
+
+        .button.level-5:active, .button.level-5.clicked {
             transform: translateY(5px) rotate(0deg);
             box-shadow: 0 3px 0 #00aa00;
         }
@@ -176,15 +412,104 @@
         .status {
             margin-top: 1.5rem;
             font-size: 1.3rem;
-            color: #ff00aa;
-            font-weight: 700;
             min-height: 1.6rem;
             transition: all 0.3s;
+        }
+
+        /* Level-based status styles */
+        body:has(.level-1) .status {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: normal;
+            transform: none;
+            font-family: Arial, sans-serif;
+        }
+
+        body:has(.level-2) .status {
+            font-size: 1rem;
+            color: #4a90e2;
+            font-weight: 500;
+            transform: none;
+        }
+
+        body:has(.level-3) .status {
+            font-size: 1.1rem;
+            color: #ff6b6b;
+            font-weight: 600;
+            transform: rotate(-0.5deg);
+        }
+
+        body:has(.level-4) .status {
+            font-size: 1.2rem;
+            color: #9c27b0;
+            font-weight: 700;
+            transform: rotate(-0.8deg);
+        }
+
+        body:has(.level-5) .status {
+            font-size: 1.3rem;
+            color: #ff00aa;
+            font-weight: 700;
             transform: rotate(-1deg);
         }
 
         .counter {
             margin-top: 1.2rem;
+            font-size: 1.8rem;
+            display: inline-block;
+        }
+
+        /* Level-based counter styles */
+        .level-1-counter {
+            font-size: 1rem;
+            color: #333;
+            font-weight: normal;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0.3rem 0.7rem;
+            box-shadow: none;
+            transform: none;
+            font-family: Arial, sans-serif;
+        }
+
+        .level-2-counter {
+            font-size: 1.2rem;
+            color: #4a90e2;
+            font-weight: 600;
+            background-color: rgba(74, 144, 226, 0.1);
+            border: 1px solid #4a90e2;
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transform: none;
+        }
+
+        .level-3-counter {
+            font-size: 1.4rem;
+            color: #ff6b6b;
+            font-weight: 700;
+            background-color: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            border-radius: 8px;
+            padding: 0.4rem 0.9rem;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+            transform: rotate(1deg);
+        }
+
+        .level-4-counter {
+            font-size: 1.6rem;
+            color: #9c27b0;
+            font-weight: 700;
+            background-color: rgba(156, 39, 176, 0.1);
+            border: 2px dashed #9c27b0;
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+            transform: rotate(1.5deg);
+        }
+
+        .level-5-counter {
             font-size: 1.8rem;
             color: #ff5722;
             font-weight: 800;
@@ -192,7 +517,6 @@
             border: 3px dashed #00ffff;
             border-radius: 10px;
             padding: 0.5rem 1rem;
-            display: inline-block;
             box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
             transform: rotate(2deg);
         }
@@ -202,10 +526,36 @@
             font-size: 0.9rem;
             color: var(--light-text);
             background-color: rgba(0, 0, 0, 0.03);
-            border-radius: 25px;
             padding: 0.5rem 1rem;
             display: inline-block;
             transition: all 0.3s;
+        }
+
+        /* Level-based connection status styles */
+        body:has(.level-1) #connection-status {
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: Arial, sans-serif;
+        }
+
+        body:has(.level-2) #connection-status {
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        body:has(.level-3) #connection-status {
+            border-radius: 16px;
+            font-size: 0.9rem;
+        }
+
+        body:has(.level-4) #connection-status {
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        body:has(.level-5) #connection-status {
+            border-radius: 25px;
+            font-size: 0.9rem;
         }
 
         /* Animations */
@@ -243,12 +593,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>EPIC BUTTON SPEEDRUN!!1!</h1>
-        <p>⚡️ CLICK AS FAST AS YOU CAN!! EVERYONE SEES YOUR CLICKS!! ⚡️</p>
-        <button id="liveButton" class="button">SMASH ME!!!</button>
-        <div class="status" id="status">LET'S GOOOOOO!!!</div>
-        <div class="counter" id="counter">Button has been SMASHED 0 times</div>
-        <div id="connection-status">Loading crazy button powers...</div>
+        <h1>Button Clicker</h1>
+        <p>Click the button to increase the counter</p>
+        <button id="liveButton" class="button level-1">Button</button>
+        <div class="status" id="status">Ready</div>
+        <div class="counter level-1-counter" id="counter">Count: 0</div>
+        <div id="connection-status">Connecting...</div>
     </div>
 
     <!-- Socket.IO Client Library -->
@@ -321,12 +671,39 @@
             function updateButtonUI(animate = true) {
                 // Apply appropriate button style based on click count
                 const button = document.getElementById('liveButton');
-                button.classList.remove('simple', 'elaborate');
+                button.classList.remove('level-1', 'level-2', 'level-3', 'level-4', 'level-5');
                 
+                // Set button level based on clicks
                 if (buttonState.count < 500) {
-                    button.classList.add('simple');
+                    button.classList.add('level-1');
+                    button.textContent = 'Button';
+                    document.title = 'Button Clicker';
+                    document.querySelector('h1').textContent = 'Button Clicker';
+                    document.querySelector('p').textContent = 'Click the button to increase the counter';
+                } else if (buttonState.count < 1000) {
+                    button.classList.add('level-2');
+                    button.textContent = 'Click Me!';
+                    document.title = 'Button Clicker Pro';
+                    document.querySelector('h1').textContent = 'Button Clicker Pro';
+                    document.querySelector('p').textContent = '⚡️ Click as fast as you can! Everyone sees your clicks!';
+                } else if (buttonState.count < 1500) {
+                    button.classList.add('level-3');
+                    button.textContent = 'CLICK ME!';
+                    document.title = 'Button Speedrun';
+                    document.querySelector('h1').textContent = 'Button Speedrun!';
+                    document.querySelector('p').textContent = '⚡️ Click as fast as you can! Everyone sees your clicks! ⚡️';
+                } else if (buttonState.count < 2000) {
+                    button.classList.add('level-4');
+                    button.textContent = 'SMASH ME!';
+                    document.title = 'Button Speedrun Pro';
+                    document.querySelector('h1').textContent = 'Button Speedrun Pro!';
+                    document.querySelector('p').textContent = '⚡️ CLICK AS FAST AS YOU CAN! EVERYONE SEES YOUR CLICKS! ⚡️';
                 } else {
-                    button.classList.add('elaborate');
+                    button.classList.add('level-5');
+                    button.textContent = 'SMASH ME!!!';
+                    document.title = 'EPIC BUTTON SPEEDRUN CHALLENGE';
+                    document.querySelector('h1').textContent = 'EPIC BUTTON SPEEDRUN!!1!';
+                    document.querySelector('p').textContent = '⚡️ CLICK AS FAST AS YOU CAN!! EVERYONE SEES YOUR CLICKS!! ⚡️';
                 }
                 
                 // Visual feedback for button click (only if local click)
@@ -337,24 +714,72 @@
                     }, 200);
                 }
                 
-                // Update counter text with animation
-                counterText.textContent = `Button has been SMASHED ${buttonState.count} times!!!!`;
-                
-                // Add SUPER EXTREME highlight animation to counter
-                counterText.style.animation = 'none'; // Reset animation
-                // Random colors for maximum excitement!!!
-                const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-                counterText.style.color = randomColor;
-                counterText.style.transform = 'scale(1.2) rotate(' + (Math.random() * 6 - 3) + 'deg)';
+                // Update counter text based on level
+                if (buttonState.count < 500) {
+                    counterText.textContent = `Count: ${buttonState.count}`;
+                    counterText.style.animation = 'none';
+                    counterText.style.color = '#333';
+                    counterText.style.transform = 'none';
+                    counterText.className = 'counter level-1-counter';
+                } else if (buttonState.count < 1000) {
+                    counterText.textContent = `Button clicked ${buttonState.count} times`;
+                    counterText.style.animation = 'none';
+                    counterText.style.color = '#4a90e2';
+                    counterText.style.transform = 'scale(1.05)';
+                    counterText.className = 'counter level-2-counter';
+                } else if (buttonState.count < 1500) {
+                    counterText.textContent = `Button clicked ${buttonState.count} times!`;
+                    counterText.style.animation = 'none';
+                    counterText.style.color = '#ff6b6b';
+                    counterText.style.transform = 'scale(1.1) rotate(1deg)';
+                    counterText.className = 'counter level-3-counter';
+                } else if (buttonState.count < 2000) {
+                    counterText.textContent = `Button SMASHED ${buttonState.count} times!!`;
+                    counterText.style.animation = 'none';
+                    counterText.style.color = '#9c27b0';
+                    counterText.style.transform = 'scale(1.15) rotate(' + (Math.random() * 4 - 2) + 'deg)';
+                    counterText.className = 'counter level-4-counter';
+                } else {
+                    counterText.textContent = `Button has been SMASHED ${buttonState.count} times!!!!`;
+                    counterText.style.animation = 'none';
+                    // Random colors for maximum excitement!!!
+                    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+                    counterText.style.color = randomColor;
+                    counterText.style.transform = 'scale(1.2) rotate(' + (Math.random() * 6 - 3) + 'deg)';
+                    counterText.className = 'counter level-5-counter';
+                }
                 
                 setTimeout(() => {
                     counterText.style.animation = 'pulse 0.5s ease-in-out';
-                    // Add special milestone messages
+                    
+                    // Add special milestone messages with progressive effects
                     if (buttonState.count % 10 === 0 && buttonState.count > 0) {
+                        // Scale effects based on level
+                        let particleCount = 50;
+                        let spread = 70;
+                        
+                        // Increase effects with level
+                        if (buttonState.count >= 2000) {
+                            particleCount = 200;
+                            spread = 180;
+                        } else if (buttonState.count >= 1500) {
+                            particleCount = 150;
+                            spread = 150;
+                        } else if (buttonState.count >= 1000) {
+                            particleCount = 120;
+                            spread = 120;
+                        } else if (buttonState.count >= 500) {
+                            particleCount = 80;
+                            spread = 100;
+                        }
+                        
                         confetti({
-                            particleCount: 200,
-                            spread: 180,
-                            origin: { y: 0.5, x: 0.5 }
+                            particleCount: particleCount,
+                            spread: spread,
+                            origin: { y: 0.5, x: 0.5 },
+                            colors: buttonState.count >= 1500 ? 
+                                ['#ff00ff', '#00ff00', '#ffff00', '#00ffff'] : 
+                                ['#4a90e2', '#ff6b6b', '#9c27b0', '#4ade80']
                         });
                     }
                 }, 10);
@@ -369,74 +794,170 @@
                 try {
                     socket.emit('button_click');
                     
-                    // Show status message for local user feedback with EXTREME animation
-                    statusText.textContent = `BOOM! EPIC CLICK!!`;
-                    statusText.style.transform = 'scale(1.2) rotate(5deg)';
-                    statusText.style.color = '#00ff00';
+                    // Different messages based on button level
+                    let clickMessage = 'Clicked!';
+                    let buttonText = 'Button';
+                    let messageColor = '#333';
+                    let messageTransform = 'scale(1.05)';
+                    
+                    if (buttonState.count < 500) {
+                        clickMessage = 'Clicked';
+                        buttonText = 'Button';
+                        messageColor = '#666';
+                        messageTransform = 'none';
+                    } else if (buttonState.count < 1000) {
+                        clickMessage = 'Good click!';
+                        buttonText = 'Click Me!';
+                        messageColor = '#4a90e2';
+                        messageTransform = 'scale(1.05)';
+                    } else if (buttonState.count < 1500) {
+                        clickMessage = 'Great click!!';
+                        buttonText = 'CLICK ME!';
+                        messageColor = '#ff6b6b';
+                        messageTransform = 'scale(1.1) rotate(2deg)';
+                    } else if (buttonState.count < 2000) {
+                        clickMessage = 'AWESOME CLICK!!!';
+                        buttonText = 'SMASH ME!';
+                        messageColor = '#9c27b0';
+                        messageTransform = 'scale(1.15) rotate(3deg)';
+                    } else {
+                        clickMessage = 'BOOM! EPIC CLICK!!';
+                        buttonText = 'SMASH ME!!!';
+                        messageColor = '#00ff00';
+                        messageTransform = 'scale(1.2) rotate(5deg)';
+                    }
+                    
+                    // Show status message with appropriate animation level
+                    statusText.textContent = clickMessage;
+                    statusText.style.transform = messageTransform;
+                    statusText.style.color = messageColor;
                     
                     // Add animation for immediate feedback
                     button.classList.add('clicked');
-                    button.textContent = 'YESSS!!';
+                    const originalText = button.textContent;
+                    button.textContent = buttonState.count < 1000 ? 'Clicked!' : 'YESSS!!';
                     setTimeout(() => {
                         button.classList.remove('clicked');
-                        button.textContent = 'SMASH ME!!!';
+                        button.textContent = buttonText;
                     
-                    // EPIC CONFETTI EXPLOSION!!!
-                    confetti({
-                        particleCount: 100,
-                        spread: 70,
-                        origin: { y: 0.6 },
-                        colors: ['#ff00ff', '#00ff00', '#ffff00', '#00ffff']
-                    });
+                    // Progressive visual effects based on level
+                    if (buttonState.count >= 500) {
+                        // Level 2+: Simple confetti
+                        const particleCount = Math.min(20 + Math.floor(buttonState.count / 100), 100);
+                        confetti({
+                            particleCount: buttonState.count >= 1000 ? particleCount : 20,
+                            spread: buttonState.count >= 1500 ? 70 : 50,
+                            origin: { y: 0.6 },
+                            colors: buttonState.count >= 2000 ? 
+                                ['#ff00ff', '#00ff00', '#ffff00', '#00ffff'] : 
+                                ['#4a90e2', '#357abd', '#4cc9f0', '#3f37c9']
+                        });
+                    }
                     
-                    // Add COMIC STYLE POW EFFECT!!
-                    const soundEffect = document.createElement('div');
-                    const sounds = ['POW!', 'BOOM!', 'WHAM!', 'BAM!', 'KAPOW!', 'ZAP!'];
-                    soundEffect.innerText = sounds[Math.floor(Math.random() * sounds.length)];
-                    soundEffect.style.position = 'absolute';
-                    soundEffect.style.left = Math.random() * 60 + 20 + '%';
-                    soundEffect.style.top = Math.random() * 60 + 20 + '%';
-                    soundEffect.style.fontSize = '3rem';
-                    soundEffect.style.fontWeight = 'bold';
-                    soundEffect.style.color = '#' + Math.floor(Math.random()*16777215).toString(16);
-                    soundEffect.style.textShadow = '2px 2px 0 #000';
-                    soundEffect.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg) scale(0)';
-                    soundEffect.style.opacity = '0';
-                    soundEffect.style.transition = 'all 0.2s ease-in-out';
-                    soundEffect.style.zIndex = '1000';
-                    document.body.appendChild(soundEffect);
-                    
-                    // Animate it
-                    setTimeout(() => {
-                        soundEffect.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg) scale(1.5)';
-                        soundEffect.style.opacity = '1';
-                    }, 10);
-                    
-                    // Remove it
-                    setTimeout(() => {
-                        soundEffect.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg) scale(0)';
+                    // Level 3+: Add text effects
+                    if (buttonState.count >= 1000) {
+                        const soundEffect = document.createElement('div');
+                        const sounds = buttonState.count >= 2000 ? 
+                            ['POW!', 'BOOM!', 'WHAM!', 'BAM!', 'KAPOW!', 'ZAP!'] : 
+                            ['Click!', 'Nice!', 'Good!', 'Great!'];
+                            
+                        soundEffect.innerText = sounds[Math.floor(Math.random() * sounds.length)];
+                        soundEffect.style.position = 'absolute';
+                        soundEffect.style.left = Math.random() * 60 + 20 + '%';
+                        soundEffect.style.top = Math.random() * 60 + 20 + '%';
+                        
+                        // Progressive styling based on level
+                        if (buttonState.count >= 2000) {
+                            // Level 5: Full comic effect
+                            soundEffect.style.fontSize = '3rem';
+                            soundEffect.style.fontWeight = 'bold';
+                            soundEffect.style.color = '#' + Math.floor(Math.random()*16777215).toString(16);
+                            soundEffect.style.textShadow = '2px 2px 0 #000';
+                            soundEffect.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg) scale(0)';
+                        } else if (buttonState.count >= 1500) {
+                            // Level 4: Better text effects
+                            soundEffect.style.fontSize = '2.5rem';
+                            soundEffect.style.fontWeight = 'bold';
+                            soundEffect.style.color = '#9c27b0';
+                            soundEffect.style.textShadow = '1px 1px 0 #000';
+                            soundEffect.style.transform = 'rotate(' + (Math.random() * 20 - 10) + 'deg) scale(0)';
+                        } else {
+                            // Level 3: Simple text effects
+                            soundEffect.style.fontSize = '2rem';
+                            soundEffect.style.fontWeight = 'bold';
+                            soundEffect.style.color = '#ff6b6b';
+                            soundEffect.style.transform = 'scale(0)';
+                        }
+                        
                         soundEffect.style.opacity = '0';
-                        setTimeout(() => soundEffect.remove(), 300);
-                    }, 1000);
+                        soundEffect.style.transition = 'all 0.2s ease-in-out';
+                        soundEffect.style.zIndex = '1000';
+                        document.body.appendChild(soundEffect);
+                        
+                        // Animate it
+                        setTimeout(() => {
+                            if (buttonState.count >= 2000) {
+                                soundEffect.style.transform = 'rotate(' + (Math.random() * 40 - 20) + 'deg) scale(1.5)';
+                            } else if (buttonState.count >= 1500) {
+                                soundEffect.style.transform = 'rotate(' + (Math.random() * 20 - 10) + 'deg) scale(1.3)';
+                            } else {
+                                soundEffect.style.transform = 'scale(1.2)';
+                            }
+                            soundEffect.style.opacity = '1';
+                        }, 10);
+                        
+                        // Remove it
+                        setTimeout(() => {
+                            soundEffect.style.transform = 'scale(0)';
+                            soundEffect.style.opacity = '0';
+                            setTimeout(() => soundEffect.remove(), 300);
+                        }, 1000);
+                    }
                     }, 300);
                     
                     // Reset status message after delay with smooth transition
                     setTimeout(() => {
                         statusText.style.transform = 'scale(1) rotate(-1deg)';
-                        statusText.style.color = '#ff00aa';
-                        statusText.textContent = 'KEEP GOING!! EVERYONE CAN SEE IT!!'; 
+                        
+                        // Different status messages based on level
+                        if (buttonState.count < 500) {
+                            statusText.style.color = '#666';
+                            statusText.textContent = 'Ready';
+                        } else if (buttonState.count < 1000) {
+                            statusText.style.color = '#4a90e2';
+                            statusText.textContent = 'Keep going! Everyone can see it!';
+                        } else if (buttonState.count < 1500) {
+                            statusText.style.color = '#ff6b6b';
+                            statusText.textContent = 'You\'re doing great! Keep clicking!';
+                        } else if (buttonState.count < 2000) {
+                            statusText.style.color = '#9c27b0';
+                            statusText.textContent = 'AMAZING! DON\'T STOP NOW!';
+                        } else {
+                            statusText.style.color = '#ff00aa';
+                            statusText.textContent = 'KEEP GOING!! EVERYONE CAN SEE IT!!';
+                        }
                     }, 2000);
                 } catch (e) {
                     // Fallback to local mode if socket fails
                     console.error('Error sending click:', e);
                     buttonState.count++;
-                    updateButtonUI();
+                    updateButtonUI(true); // Use true to get animations
                     statusText.textContent = 'Using local mode (server connection failed)';
                 }
             });
             
             // Initial status message
-            statusText.textContent = 'Click the button so everyone can see!';
+            if (buttonState.count < 500) {
+                statusText.textContent = 'Ready';
+            } else if (buttonState.count < 1000) {
+                statusText.textContent = 'Click the button!';
+            } else if (buttonState.count < 1500) {
+                statusText.textContent = 'Click so everyone can see!';
+            } else if (buttonState.count < 2000) {
+                statusText.textContent = 'CLICK FASTER!';
+            } else {
+                statusText.textContent = 'CLICK THE BUTTON SO EVERYONE CAN SEE!';
+            }
         }
     </script>
 </body>
