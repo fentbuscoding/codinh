@@ -5,3 +5,7 @@ test_features.py
 stats.json
 achievements.json
 button_clicks.json
+.env
+data/app.log
+test_enhanced.py
+test_button_clicks.json
