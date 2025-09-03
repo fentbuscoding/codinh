@@ -207,10 +207,10 @@ Run the comprehensive test suite:
 
 ```bash
 # Run all tests
-python test_enhanced.py
+python test.py
 
 # Run quick tests (without server dependency)
-python test_enhanced.py --quick
+python test.py --quick
 ```
 
 ## Monitoring & Maintenance

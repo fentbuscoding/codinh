@@ -1,0 +1,81 @@
+{
+  "timestamp": "20250904_112146",
+  "button_state": {
+    "count": 45,
+    "last_updated": 1756941444.7869868,
+    "version": "2.0"
+  },
+  "achievements": {
+    "global_unlocked": [
+      "first_click",
+      "speed_clicker",
+      "ten_clicks"
+    ],
+    "player_achievements": {
+      "client_1756941436.0650475_3": [
+        "first_click",
+        "speed_clicker",
+        "ten_clicks"
+      ]
+    },
+    "version": "2.0",
+    "last_updated": 1756941438.7012553
+  },
+  "stats": {
+    "clicks_today": 45,
+    "date": "2025-09-04",
+    "clicks_per_hour": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      45,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "unique_users": 4,
+    "user_sessions": {
+      "client_1756941407.2517111_0": {
+        "first_connected": 1756941407.2517338,
+        "clicks": 0,
+        "socket_id": "60478bb8-c218-48ff-be8e-a4a1344c44bb"
+      },
+      "client_1756941412.3438234_1": {
+        "first_connected": 1756941412.3438556,
+        "clicks": 0,
+        "socket_id": "136bdb59-15d9-424f-8620-5f2bd5a6abb7"
+      },
+      "client_1756941421.7517118_2": {
+        "first_connected": 1756941421.7517326,
+        "clicks": 0,
+        "socket_id": "e4c53ab3-34e6-428f-9ff1-a5356683791e"
+      },
+      "client_1756941436.0650475_3": {
+        "first_connected": 1756941436.0650613,
+        "clicks": 45,
+        "socket_id": "b10ddf83-3499-4c11-bc45-63ec6a7920dd",
+        "last_click": 1756941444.7858396
+      }
+    },
+    "version": "2.0",
+    "last_updated": 1756941444.785863
+  },
+  "version": "2.0"
+}
