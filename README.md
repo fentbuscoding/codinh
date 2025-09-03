@@ -1,5 +1,26 @@
 # Interactive Button Speedrun Challenge - Enhanced v2.0
 
+🎮 **[Play the GitHub Pages version instantly!](https://fentbuscoding.github.io/codinh/)** - No setup required!
+
+This project includes two versions:
+- **GitHub Pages Edition**: Static version that works in any browser without a server
+- **Enhanced Server Edition**: Full-featured Flask-SocketIO version with real-time multiplayer
+
+## 🌐 GitHub Pages Edition (Recommended for Quick Play)
+
+The GitHub Pages version is a complete standalone implementation that includes:
+- ✅ All 10 achievements
+- ✅ 5 progressive levels with visual/audio effects  
+- ✅ Real-time statistics and session tracking
+- ✅ Persistent progress (localStorage)
+- ✅ Mobile-friendly responsive design
+- ✅ Sound effects and confetti animations
+- ✅ No installation required
+
+**🚀 [Play Now on GitHub Pages](https://fentbuscoding.github.io/codinh/)**
+
+## 🖥️ Enhanced Server Edition (v2.0)
+
 This is a significantly improved multi-user button clicking game built with Flask and Socket.IO. The enhanced version includes better architecture, error handling, performance optimizations, security features, and comprehensive logging.
 
 ## 🚀 What's New in v2.0

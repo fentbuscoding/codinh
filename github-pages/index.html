@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>EPIC BUTTON SPEEDRUN CHALLENGE - GitHub Pages Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #ff9e40;
+            --accent-color: #4effa1;
+            --success-color: #00ff9d;
+            --text-color: #333;
+            --light-text: #7b7b7b;
+            --background-color: #f0f2f5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #ffde59;
+            background-image: linear-gradient(45deg, #ffde59 25%, #ffcc00 25%, #ffcc00 50%, #ffde59 50%, #ffde59 75%, #ffcc00 75%, #ffcc00 100%);
+            background-size: 40px 40px;
+            color: var(--text-color);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* GitHub Pages banner */
+        .gh-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #24292e, #586069);
+            color: white;
+            padding: 8px 16px;
+            font-size: 12px;
+            text-align: center;
+            z-index: 10000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .gh-banner a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        
+        .gh-banner a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            body {
+                background-size: 20px 20px;
+                padding-top: 40px; /* Account for GitHub banner */
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+                width: 95%;
+                max-width: 95%;
+            }
+        }
+
+        .container {
+            text-align: center;
+            padding: 2.5rem;
+            background-color: white;
+            max-width: 550px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+            margin: 40px 10px 10px; /* Account for GitHub banner */
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Stats panel */
+        .stats-panel {
+            position: fixed;
+            top: 40px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            z-index: 1000;
+            min-width: 200px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stats-panel h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 2px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat-label {
+            color: #666;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* Achievements system */
+        .achievements-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+        
+        .achievements-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .achievements-panel {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 90%;
+            max-width: 400px;
+            height: 100%;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .achievements-panel.active {
+            left: 0;
+        }
+        
+        .achievements-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .achievements-header h2 {
+            margin: 0;
+        }
+        
+        .achievements-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .achievements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .achievement {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .achievement.locked {
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+        
+        .achievement.locked .achievement-icon {
+            background-color: #ccc;
+            color: #666;
+        }
+        
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #FFD700;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .achievement-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .achievement-description {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .achievement-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 215, 0, 0.95);
+            color: black;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            transform: translateX(120%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            max-width: 90%;
+        }
+        
+        .achievement-notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .notification-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Different container styles based on level */
+        body:has(.level-1) {
+            background-color: #f8f8f8;
+            background-image: none;
+            font-family: Arial, sans-serif;
+        }
+
+        body:has(.level-2) {
+            background-color: #f0f2f5;
+            background-image: linear-gradient(135deg, #f0f2f5 0%, #dfe6e9 100%);
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body:has(.level-3) {
+            background-color: #ffde59;
+            background-image: linear-gradient(45deg, #ffde59 0%, #ffcc00 100%);
+        }
+
+        body:has(.level-4) {
+            background-color: #673ab7;
+            background-image: linear-gradient(135deg, #673ab7 0%, #9c27b0 100%);
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+        }
+
+        body:has(.level-5) {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            background-color: #ffde59;
+            background-image: linear-gradient(45deg, #ffde59 25%, #ffcc00 25%, #ffcc00 50%, #ffde59 50%, #ffde59 75%, #ffcc00 75%, #ffcc00 100%);
+            background-size: 40px 40px;
+        }
+
+        /* Container styling based on level */
+        body:has(.level-1) .container {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: none;
+        }
+
+        body:has(.level-2) .container {
+            border: 2px solid #4a90e2;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        body:has(.level-3) .container {
+            border: 3px solid #ff9e40;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        body:has(.level-4) .container {
+            border: 3px solid #9c27b0;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            animation: fadeIn 0.7s ease-out;
+        }
+
+        body:has(.level-5) .container {
+            border: 4px dashed #ff00ff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(255, 0, 255, 0.3);
+            animation: rotate 4s infinite alternate;
+        }
+
+        body:has(.level-5) .container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 20px, #ffde59 20px, #ffde59 40px);
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(-0.5deg); }
+            100% { transform: rotate(0.5deg); }
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* Level-based heading styles */
+        body:has(.level-1) h1 {
+            color: #333;
+            font-weight: 600;
+            font-family: Arial, sans-serif;
+            transform: none;
+            letter-spacing: normal;
+            text-shadow: none;
+            animation: none;
+            font-size: 1.8rem;
+        }
+        
+        body:has(.level-2) h1 {
+            color: #4a90e2;
+            font-weight: 700;
+            font-size: 2rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body:has(.level-3) h1 {
+            color: #ff6b6b;
+            font-weight: 700;
+            font-size: 2.2rem;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+            transform: rotate(-1deg);
+        }
+
+        body:has(.level-4) h1 {
+            color: #9c27b0;
+            font-weight: 800;
+            font-size: 2.3rem;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+            transform: rotate(-1.5deg);
+            animation: pulse 2s infinite alternate;
+        }
+
+        body:has(.level-5) h1 {
+            color: #ff00aa;
+            font-weight: 800;
+            font-size: 2.5rem;
+            text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00;
+            transform: rotate(-2deg);
+            animation: blink 1.5s infinite alternate;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00; }
+            100% { opacity: 0.8; text-shadow: 4px 4px 0 #ffff00, -4px -4px 0 #00ffff; }
+        }
+
+        .button {
+            padding: 1.2rem 3rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            border: none;
+            min-height: 44px;
+            min-width: 120px;
+        }
+
+        /* Level 1 (0-500 clicks): Default browser button */
+        .button.level-1 {
+            background-color: #f0f0f0;
+            border: 1px solid #c0c0c0;
+            border-radius: 4px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            box-shadow: none;
+            transform: none;
+            text-shadow: none;
+        }
+
+        /* Level 2 (500-1000 clicks): Better looking button */
+        .button.level-2 {
+            border: 2px solid #4a90e2;
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+        }
+
+        /* Level 3 (1000-1500 clicks): Even better */
+        .button.level-3 {
+            border: 2px solid #ff9e40;
+            background: linear-gradient(135deg, #ff9e40, #ff6b6b);
+            color: white;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            box-shadow: 0 6px 0 #e5614d;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+        }
+
+        /* Level 4 (1500-2000 clicks): Getting fancy */
+        .button.level-4 {
+            border: 3px solid #9c27b0;
+            background: linear-gradient(135deg, #9c27b0, #673ab7);
+            color: white;
+            border-radius: 15px;
+            padding: 1rem 2.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            box-shadow: 0 6px 0 #6a1b9a;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        /* Level 5 (2000+ clicks): Crazy button */
+        .button.level-5 {
+            border: 3px solid #00ff00;
+            background: repeating-radial-gradient(circle, #ff9e40, #ff6b6b 30px, #ff00ff 30px, #ff00ff 60px);
+            color: white;
+            box-shadow: 0 8px 0 #00aa00;
+            border-radius: 20px;
+            padding: 1.2rem 3rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'Comic Sans MS', cursive;
+            text-shadow: 2px 2px 0 #000;
+            transform: rotate(-3deg);
+            letter-spacing: 1px;
+            overflow: hidden;
+        }
+
+        @keyframes shake {
+            0% { transform: translateY(-3px) rotate(-5deg); }
+            50% { transform: translateY(-3px) rotate(5deg); }
+            100% { transform: translateY(-3px) rotate(-5deg); }
+        }
+
+        /* Button hover effects for each level */
+        .button.level-1:hover {
+            background-color: #e8e8e8;
+            border-color: #b8b8b8;
+        }
+
+        .button.level-2:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(74, 144, 226, 0.4);
+        }
+
+        .button.level-3:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #e5614d;
+        }
+
+        .button.level-4:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 0 #6a1b9a;
+        }
+
+        .button.level-5:hover {
+            transform: translateY(-3px) rotate(3deg) scale(1.1);
+            box-shadow: 0 12px 0 #00aa00;
+            animation: shake 0.5s infinite;
+        }
+
+        .button:active {
+            transform: translateY(2px);
+        }
+
+        .status {
+            margin-top: 1.5rem;
+            font-size: 1.3rem;
+            min-height: 1.6rem;
+            transition: all 0.3s;
+        }
+
+        .counter {
+            margin-top: 1.2rem;
+            font-size: 1.8rem;
+            display: inline-block;
+        }
+
+        /* Level-based counter styles */
+        .level-1-counter {
+            font-size: 1rem;
+            color: #333;
+            font-weight: normal;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0.3rem 0.7rem;
+            box-shadow: none;
+            transform: none;
+            font-family: Arial, sans-serif;
+        }
+
+        .level-2-counter {
+            font-size: 1.2rem;
+            color: #4a90e2;
+            font-weight: 600;
+            background-color: rgba(74, 144, 226, 0.1);
+            border: 1px solid #4a90e2;
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .level-3-counter {
+            font-size: 1.4rem;
+            color: #ff6b6b;
+            font-weight: 700;
+            background-color: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            border-radius: 8px;
+            padding: 0.4rem 0.9rem;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+            transform: rotate(1deg);
+        }
+
+        .level-4-counter {
+            font-size: 1.6rem;
+            color: #9c27b0;
+            font-weight: 700;
+            background-color: rgba(156, 39, 176, 0.1);
+            border: 2px dashed #9c27b0;
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+            transform: rotate(1.5deg);
+        }
+
+        .level-5-counter {
+            font-size: 1.8rem;
+            color: #ff5722;
+            font-weight: 800;
+            background-color: #ffff00;
+            border: 3px dashed #00ffff;
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+            transform: rotate(2deg);
+        }
+
+        .connection-status {
+            margin-top: 1.8rem;
+            font-size: 0.9rem;
+            color: var(--light-text);
+            background-color: rgba(0, 0, 0, 0.03);
+            padding: 0.5rem 1rem;
+            display: inline-block;
+            transition: all 0.3s;
+            border-radius: 20px;
+        }
+        
+        /* Sound control button */
+        .sound-control {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 20px;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+        
+        .sound-control:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(67, 97, 238, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(67, 97, 238, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(67, 97, 238, 0.5); }
+        }
+
+        .button.clicked {
+            animation: pulse 0.3s ease-in-out;
+        }
+
+        .counter {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .container {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .stats-panel {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 10px auto;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .button {
+                min-height: 44px;
+                min-width: 120px;
+            }
+            
+            .sound-control, .achievements-button {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+            
+            .achievement-notification {
+                bottom: 10px;
+                right: 10px;
+                width: calc(100% - 40px);
+                max-width: calc(100% - 40px);
+            }
+            
+            .achievements-panel {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- GitHub Pages Banner -->
+    <div class="gh-banner">
+        🚀 GitHub Pages Edition - Single Player Mode | 
+        <a href="https://github.com/fentbuscoding/codinh" target="_blank">View Source</a> | 
+        <a href="#" onclick="toggleStats()">Toggle Stats</a>
+    </div>
+
+    <!-- Stats Panel -->
+    <div class="stats-panel" id="statsPanel">
+        <h3>📊 Session Statistics</h3>
+        <div class="stat-row">
+            <span class="stat-label">Session Time:</span>
+            <span class="stat-value" id="sessionTime">0s</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Clicks/Min:</span>
+            <span class="stat-value" id="clicksPerMin">0</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Best Streak:</span>
+            <span class="stat-value" id="bestStreak">0</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Total Achievements:</span>
+            <span class="stat-value" id="totalAchievements">0</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Current Level:</span>
+            <span class="stat-value" id="currentLevel">1</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Button Clicker</h1>
+        <p>Click the button to increase the counter</p>
+        <button id="liveButton" class="button level-1">Button</button>
+        <div class="status" id="status">Ready</div>
+        <div class="counter level-1-counter" id="counter">Count: 0</div>
+        <div class="connection-status" id="connectionStatus">GitHub Pages - Single Player Mode</div>
+        <div class="sound-control" id="soundToggle" title="Toggle sound">🔊</div>
+        <div class="achievements-button" id="achievementsButton" title="View achievements">🏆</div>
+    </div>
+    
+    <!-- Achievements Panel -->
+    <div class="achievements-panel" id="achievementsPanel">
+        <div class="achievements-header">
+            <h2>Achievements</h2>
+            <button class="achievements-close" id="achievementsClose">&times;</button>
+        </div>
+        <div class="achievements-list" id="achievementsList"></div>
+    </div>
+    
+    <!-- Achievement Notification Template -->
+    <div class="achievement-notification" id="achievementNotification">
+        <div class="notification-icon">🏆</div>
+        <div class="notification-content">
+            <strong>Achievement Unlocked!</strong>
+            <span id="notificationText">Achievement name</span>
+        </div>
+    </div>
+
+    <!-- Confetti JS for effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <!-- Howler.js for audio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    
+    <script>
+        // GitHub Pages Static Version - No Server Required
+        class ButtonClickerGitHubPages {
+            constructor() {
+                this.buttonState = this.loadFromLocalStorage('buttonState', { count: 0 });
+                this.achievements = this.loadFromLocalStorage('achievements', []);
+                this.stats = this.loadFromLocalStorage('stats', {
+                    sessionStartTime: Date.now(),
+                    clickTimes: [],
+                    bestStreak: 0,
+                    currentStreak: 0,
+                    lastClickTime: 0
+                });
+                this.currentLevel = 1;
+                this.soundEnabled = this.loadFromLocalStorage('soundEnabled', true);
+                this.recentClicks = [];
+                
+                this.initElements();
+                this.initSounds();
+                this.initAchievements();
+                this.initEventListeners();
+                this.updateUI();
+                this.startStatsUpdater();
+                
+                console.log('🚀 GitHub Pages Button Clicker initialized!');
+            }
+            
+            loadFromLocalStorage(key, defaultValue) {
+                try {
+                    const stored = localStorage.getItem(`gh-button-clicker-${key}`);
+                    return stored ? JSON.parse(stored) : defaultValue;
+                } catch {
+                    return defaultValue;
+                }
+            }
+            
+            saveToLocalStorage(key, value) {
+                try {
+                    localStorage.setItem(`gh-button-clicker-${key}`, JSON.stringify(value));
+                } catch (e) {
+                    console.warn('Failed to save to localStorage:', e);
+                }
+            }
+            
+            initElements() {
+                this.button = document.getElementById('liveButton');
+                this.statusText = document.getElementById('status');
+                this.counterText = document.getElementById('counter');
+                this.connectionStatus = document.getElementById('connectionStatus');
+                this.soundToggle = document.getElementById('soundToggle');
+                this.achievementsButton = document.getElementById('achievementsButton');
+                this.achievementsPanel = document.getElementById('achievementsPanel');
+                this.achievementsClose = document.getElementById('achievementsClose');
+                this.achievementsList = document.getElementById('achievementsList');
+                this.achievementNotification = document.getElementById('achievementNotification');
+                this.notificationText = document.getElementById('notificationText');
+                
+                // Stats elements
+                this.sessionTime = document.getElementById('sessionTime');
+                this.clicksPerMin = document.getElementById('clicksPerMin');
+                this.bestStreak = document.getElementById('bestStreak');
+                this.totalAchievements = document.getElementById('totalAchievements');
+                this.currentLevelElement = document.getElementById('currentLevel');
+                this.statsPanel = document.getElementById('statsPanel');
+            }
+            
+            initSounds() {
+                this.sounds = {
+                    click: [
+                        new Howl({ src: ['https://assets.mixkit.co/sfx/preview/mixkit-light-button-1114.mp3'], volume: 0.5 }),
+                        new Howl({ src: ['https://assets.mixkit.co/sfx/preview/mixkit-interface-click-1126.mp3'], volume: 0.5 }),
+                        new Howl({ src: ['https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3'], volume: 0.5 }),
+                        new Howl({ src: ['https://assets.mixkit.co/sfx/preview/mixkit-quick-win-video-game-notification-269.mp3'], volume: 0.5 }),
+                        new Howl({ src: ['https://assets.mixkit.co/sfx/preview/mixkit-fairy-arcade-sparkle-866.mp3'], volume: 0.6 })
+                    ],
+                    achievement: new Howl({ src: ['https://assets.mixkit.co/sfx/preview/mixkit-retro-game-notification-212.mp3'], volume: 0.7 }),
+                    levelUp: new Howl({ src: ['https://assets.mixkit.co/sfx/preview/mixkit-game-level-completed-2059.mp3'], volume: 0.7 }),
+                    milestone: new Howl({ src: ['https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3'], volume: 0.6 })
+                };
+                
+                this.soundToggle.textContent = this.soundEnabled ? '🔊' : '🔇';
+            }
+            
+            initAchievements() {
+                this.achievementDefinitions = [
+                    {
+                        id: 'first_click',
+                        name: 'First Click',
+                        description: 'Click the button for the first time',
+                        icon: '👆',
+                        condition: (count) => count >= 1
+                    },
+                    {
+                        id: 'ten_clicks',
+                        name: 'Getting Started',
+                        description: 'Click the button 10 times',
+                        icon: '🔥',
+                        condition: (count) => count >= 10
+                    },
+                    {
+                        id: 'fifty_clicks',
+                        name: 'Halfway There',
+                        description: 'Click the button 50 times',
+                        icon: '🚀',
+                        condition: (count) => count >= 50
+                    },
+                    {
+                        id: 'hundred_clicks',
+                        name: 'Century',
+                        description: 'Click the button 100 times',
+                        icon: '🌟',
+                        condition: (count) => count >= 100
+                    },
+                    {
+                        id: 'level_2',
+                        name: 'Level Up',
+                        description: 'Reach Level 2',
+                        icon: '⬆️',
+                        condition: (count) => count >= 500
+                    },
+                    {
+                        id: 'level_3',
+                        name: 'Button Master',
+                        description: 'Reach Level 3',
+                        icon: '💥',
+                        condition: (count) => count >= 1000
+                    },
+                    {
+                        id: 'level_4',
+                        name: 'Button Pro',
+                        description: 'Reach Level 4',
+                        icon: '🥇',
+                        condition: (count) => count >= 1500
+                    },
+                    {
+                        id: 'level_5',
+                        name: 'Button God',
+                        description: 'Reach the final level',
+                        icon: '👑',
+                        condition: (count) => count >= 2000
+                    },
+                    {
+                        id: 'speed_clicker',
+                        name: 'Speed Clicker',
+                        description: 'Click 5 times in 3 seconds',
+                        icon: '⚡',
+                        condition: () => false // Special logic
+                    },
+                    {
+                        id: 'persistent',
+                        name: 'Persistent',
+                        description: 'Keep clicking even on GitHub Pages!',
+                        icon: '🏠',
+                        condition: (count) => count >= 25
+                    }
+                ];
+            }
+            
+            initEventListeners() {
+                // Button click
+                this.button.addEventListener('click', () => this.handleButtonClick());
+                
+                // Sound toggle
+                this.soundToggle.addEventListener('click', () => {
+                    this.soundEnabled = !this.soundEnabled;
+                    this.soundToggle.textContent = this.soundEnabled ? '🔊' : '🔇';
+                    this.saveToLocalStorage('soundEnabled', this.soundEnabled);
+                });
+                
+                // Achievements panel
+                this.achievementsButton.addEventListener('click', () => {
+                    this.renderAchievements();
+                    this.achievementsPanel.classList.add('active');
+                });
+                
+                this.achievementsClose.addEventListener('click', () => {
+                    this.achievementsPanel.classList.remove('active');
+                });
+                
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if (e.code === 'Space') {
+                        e.preventDefault();
+                        this.handleButtonClick();
+                    }
+                });
+            }
+            
+            handleButtonClick() {
+                const now = Date.now();
+                
+                // Update count
+                this.buttonState.count++;
+                
+                // Track click timing for speed achievements and stats
+                this.stats.clickTimes.push(now);
+                this.recentClicks.push(now);
+                
+                // Keep only last 5 seconds of clicks for speed achievement
+                const fiveSecondsAgo = now - 5000;
+                this.recentClicks = this.recentClicks.filter(time => time > fiveSecondsAgo);
+                
+                // Update streak
+                if (now - this.stats.lastClickTime < 2000) { // Within 2 seconds
+                    this.stats.currentStreak++;
+                } else {
+                    this.stats.currentStreak = 1;
+                }
+                
+                if (this.stats.currentStreak > this.stats.bestStreak) {
+                    this.stats.bestStreak = this.stats.currentStreak;
+                }
+                
+                this.stats.lastClickTime = now;
+                
+                // Play sound
+                this.playSound('click');
+                
+                // Check achievements
+                this.checkAchievements();
+                
+                // Update UI
+                this.updateUI();
+                
+                // Visual feedback
+                this.showClickFeedback();
+                
+                // Save state
+                this.saveState();
+            }
+            
+            checkAchievements() {
+                const now = Date.now();
+                let newAchievements = [];
+                
+                // Check standard achievements
+                this.achievementDefinitions.forEach(achievement => {
+                    if (!this.achievements.includes(achievement.id)) {
+                        if (achievement.condition(this.buttonState.count)) {
+                            this.achievements.push(achievement.id);
+                            newAchievements.push(achievement);
+                        }
+                    }
+                });
+                
+                // Check speed clicker achievement
+                if (!this.achievements.includes('speed_clicker') && this.recentClicks.length >= 5) {
+                    const speedAchievement = this.achievementDefinitions.find(a => a.id === 'speed_clicker');
+                    this.achievements.push('speed_clicker');
+                    newAchievements.push(speedAchievement);
+                }
+                
+                // Show notifications for new achievements
+                newAchievements.forEach((achievement, index) => {
+                    setTimeout(() => {
+                        this.showAchievementNotification(achievement);
+                        this.playSound('achievement');
+                    }, index * 1000);
+                });
+                
+                if (newAchievements.length > 0) {
+                    this.saveToLocalStorage('achievements', this.achievements);
+                }
+            }
+            
+            updateUI() {
+                const count = this.buttonState.count;
+                
+                // Determine level
+                let level = 1;
+                if (count >= 2000) level = 5;
+                else if (count >= 1500) level = 4;
+                else if (count >= 1000) level = 3;
+                else if (count >= 500) level = 2;
+                
+                // Check for level up
+                if (level > this.currentLevel) {
+                    this.currentLevel = level;
+                    this.showLevelUp();
+                }
+                
+                // Update button styling
+                this.button.className = `button level-${level}`;
+                
+                // Update text based on level
+                const levelConfig = {
+                    1: { title: 'Button Clicker', subtitle: 'Click the button to increase the counter', button: 'Button' },
+                    2: { title: 'Button Clicker Pro', subtitle: '⚡️ Click as fast as you can!', button: 'Click Me!' },
+                    3: { title: 'Button Speedrun!', subtitle: '⚡️ Click as fast as you can! ⚡️', button: 'CLICK ME!' },
+                    4: { title: 'Button Speedrun Pro!', subtitle: '⚡️ CLICK AS FAST AS YOU CAN! ⚡️', button: 'SMASH ME!' },
+                    5: { title: 'EPIC BUTTON SPEEDRUN!!1!', subtitle: '⚡️ CLICK AS FAST AS YOU CAN!! ⚡️', button: 'SMASH ME!!!' }
+                };
+                
+                const config = levelConfig[level];
+                document.querySelector('h1').textContent = config.title;
+                document.querySelector('p').textContent = config.subtitle;
+                this.button.textContent = config.button;
+                document.title = config.title + ' - GitHub Pages Edition';
+                
+                // Update counter
+                const counterClass = `level-${level}-counter`;
+                this.counterText.className = `counter ${counterClass}`;
+                
+                if (level === 1) {
+                    this.counterText.textContent = `Count: ${count}`;
+                } else if (level === 2) {
+                    this.counterText.textContent = `Button clicked ${count} times`;
+                } else if (level === 3) {
+                    this.counterText.textContent = `Button clicked ${count} times!`;
+                } else if (level === 4) {
+                    this.counterText.textContent = `Button SMASHED ${count} times!!`;
+                } else {
+                    this.counterText.textContent = `Button has been SMASHED ${count} times!!!!`;
+                }
+                
+                // Update stats
+                this.updateStats();
+                
+                // Milestone effects
+                if (count % 10 === 0 && count > 0) {
+                    this.showMilestoneEffect(level);
+                }
+            }
+            
+            updateStats() {
+                const now = Date.now();
+                const sessionDuration = (now - this.stats.sessionStartTime) / 1000;
+                const clicksInLastMinute = this.stats.clickTimes.filter(time => now - time < 60000).length;
+                
+                this.sessionTime.textContent = `${Math.floor(sessionDuration)}s`;
+                this.clicksPerMin.textContent = clicksInLastMinute.toString();
+                this.bestStreak.textContent = this.stats.bestStreak.toString();
+                this.totalAchievements.textContent = this.achievements.length.toString();
+                this.currentLevelElement.textContent = this.currentLevel.toString();
+            }
+            
+            showClickFeedback() {
+                this.button.classList.add('clicked');
+                setTimeout(() => this.button.classList.remove('clicked'), 200);
+                
+                // Status message
+                const messages = {
+                    1: 'Clicked',
+                    2: 'Good click!',
+                    3: 'Great click!!',
+                    4: 'AWESOME CLICK!!!',
+                    5: 'BOOM! EPIC CLICK!!'
+                };
+                
+                this.statusText.textContent = messages[this.currentLevel];
+                
+                setTimeout(() => {
+                    const readyMessages = {
+                        1: 'Ready',
+                        2: 'Keep going!',
+                        3: 'You\'re doing great!',
+                        4: 'AMAZING! DON\'T STOP NOW!',
+                        5: 'KEEP GOING!! EPIC MODE!!'
+                    };
+                    this.statusText.textContent = readyMessages[this.currentLevel];
+                }, 2000);
+            }
+            
+            showLevelUp() {
+                this.playSound('levelUp');
+                
+                const levelUpMsg = document.createElement('div');
+                levelUpMsg.textContent = `LEVEL UP! You reached Level ${this.currentLevel}!`;
+                levelUpMsg.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(0);
+                    background-color: rgba(255, 215, 0, 0.9);
+                    color: black;
+                    padding: 20px 30px;
+                    border-radius: 10px;
+                    font-weight: bold;
+                    font-size: 24px;
+                    z-index: 10000;
+                    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+                    transition: all 0.5s ease;
+                `;
+                
+                document.body.appendChild(levelUpMsg);
+                
+                setTimeout(() => {
+                    levelUpMsg.style.transform = 'translate(-50%, -50%) scale(1)';
+                    confetti({
+                        particleCount: 150,
+                        spread: 180,
+                        origin: { y: 0.5, x: 0.5 }
+                    });
+                }, 100);
+                
+                setTimeout(() => {
+                    levelUpMsg.style.transform = 'translate(-50%, -50%) scale(0)';
+                    setTimeout(() => levelUpMsg.remove(), 500);
+                }, 3000);
+            }
+            
+            showMilestoneEffect(level) {
+                this.playSound('milestone');
+                
+                const particleCount = Math.min(50 + level * 20, 200);
+                const spread = Math.min(70 + level * 20, 180);
+                
+                confetti({
+                    particleCount,
+                    spread,
+                    origin: { y: 0.6 }
+                });
+            }
+            
+            showAchievementNotification(achievement) {
+                this.notificationText.textContent = achievement.name;
+                this.achievementNotification.classList.add('show');
+                
+                setTimeout(() => {
+                    this.achievementNotification.classList.remove('show');
+                }, 5000);
+            }
+            
+            renderAchievements() {
+                this.achievementsList.innerHTML = '';
+                this.achievementDefinitions.forEach(achievement => {
+                    const isUnlocked = this.achievements.includes(achievement.id);
+                    const achievementElement = document.createElement('div');
+                    achievementElement.className = `achievement ${isUnlocked ? '' : 'locked'}`;
+                    
+                    achievementElement.innerHTML = `
+                        <div class="achievement-icon">${achievement.icon}</div>
+                        <div class="achievement-name">${isUnlocked ? achievement.name : '???'}</div>
+                        <div class="achievement-description">${isUnlocked ? achievement.description : 'Achievement locked'}</div>
+                    `;
+                    
+                    this.achievementsList.appendChild(achievementElement);
+                });
+            }
+            
+            playSound(type) {
+                if (!this.soundEnabled) return;
+                
+                try {
+                    if (type === 'click') {
+                        const levelIndex = this.currentLevel - 1;
+                        this.sounds.click[levelIndex]?.play();
+                    } else {
+                        this.sounds[type]?.play();
+                    }
+                } catch (e) {
+                    console.warn('Sound play failed:', e);
+                }
+            }
+            
+            startStatsUpdater() {
+                setInterval(() => this.updateStats(), 1000);
+            }
+            
+            saveState() {
+                this.saveToLocalStorage('buttonState', this.buttonState);
+                this.saveToLocalStorage('stats', this.stats);
+            }
+        }
+        
+        // Global functions for GitHub Pages
+        function toggleStats() {
+            const panel = document.getElementById('statsPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            window.buttonClicker = new ButtonClickerGitHubPages();
+        });
+    </script>
+</body>
+</html>
